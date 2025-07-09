@@ -1,0 +1,84 @@
+---
+import '../styles/banner.css';
+---
+
+<div class="banner">
+<!-- 타이핑 시뮬레이션 -->
+<div class="bg-container">
+    <!-- 배경화면 -->
+    <div class="blurred-overlay"></div>
+  </div>
+
+  <div class="typing-container">
+    <span class="fixed-text">Hello :) </span><br />
+    <span class="fixed-text">Meongdee's Dev World!</span><br />
+    <span class="fixed-text">I love </span>
+    <span id="dynamic-text" class="typing-text"></span>
+    <span id="dynamic-cursor" class="cursor">|</span>
+  </div>
+</div>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const dynamicTextElement = document.getElementById("dynamic-text");
+      const dynamicCursorElement = document.getElementById("dynamic-cursor");
+
+      // 'I love ' 뒤에 붙을 동적인 메시지들
+      const dynamicMessages = [
+        "solving problems.",
+        "programming.",
+        "learning.",
+        "growing.",
+      ];
+
+      let messageIndex = 0; // 현재 타이핑/삭제할 동적 메시지 인덱스
+      let charIndex = 0; // 현재 동적 메시지에서 타이핑/삭제할 글자 인덱스
+
+      const typingSpeed = 70; // 한 글자 타이핑 속도 (밀리초)
+      const erasingSpeed = 40; // 한 글자 지우는 속도 (밀리초)
+      const delayAfterType = 1500; // 타이핑 완료 후 다음 액션까지 딜레이
+      const delayAfterErase = 500; // 지우기 완료 후 다음 액션까지 딜레이
+
+      // 동적 텍스트 타이핑 함수
+      function typeDynamicText() {
+        if (charIndex < dynamicMessages[messageIndex].length) {
+          dynamicTextElement.textContent +=
+            dynamicMessages[messageIndex].charAt(charIndex);
+          charIndex++;
+          setTimeout(typeDynamicText, typingSpeed);
+        } else {
+          // 타이핑 완료 후 커서 활성화 및 잠시 대기
+          dynamicCursorElement.style.opacity = 1;
+          dynamicCursorElement.style.animationPlayState = "running";
+          setTimeout(eraseDynamicText, delayAfterType);
+        }
+      }
+
+      // 동적 텍스트 지우는 함수
+      function eraseDynamicText() {
+        if (charIndex > 0) {
+          dynamicTextElement.textContent = dynamicMessages[
+            messageIndex
+          ].substring(0, charIndex - 1);
+          charIndex--;
+          setTimeout(eraseDynamicText, erasingSpeed);
+        } else {
+          // 지우기 완료 후 커서 비활성화
+          dynamicCursorElement.style.opacity = 0;
+          dynamicCursorElement.style.animationPlayState = "paused";
+
+          // 다음 동적 메시지로 이동하거나 처음으로 돌아감
+          messageIndex++;
+          if (messageIndex >= dynamicMessages.length) {
+            messageIndex = 0; // 모든 동적 메시지 출력 후 처음으로 돌아가기
+          }
+          setTimeout(typeDynamicText, delayAfterErase); // 다음 동적 메시지 타이핑 시작
+        }
+      }
+
+      // 초기 애니메이션 시작
+      // 처음에는 커서 숨기고 시작
+      dynamicCursorElement.style.opacity = 0;
+      dynamicCursorElement.style.animationPlayState = "paused";
+      typeDynamicText(); // 동적 텍스트 애니메이션 시작
+    });
+  </script>

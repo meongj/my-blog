@@ -1,0 +1,29 @@
+---
+import { getCollection } from "astro:content";
+import Card from '../components/Card.astro';
+import '../styles/cardList.css';
+
+const posts = await getCollection('posts');
+---
+
+<div>
+<div class="post-header">
+    <div class="post-title">
+        <h4>전체글</h4> <span>({posts.length})</span>  
+    </div>
+    <hr />
+</div>
+    
+<div class="cards">
+    {posts.map(post => (
+        <Card
+          title={post.data.title}
+          description={post.data.description}
+          date={post.data.date}
+          category={post.data.category}
+          image={post.data.image}
+          slug={post.data.slug}
+        />
+      ))}
+</div>
+</div>

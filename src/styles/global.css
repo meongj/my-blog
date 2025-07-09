@@ -1,0 +1,27 @@
+/* 한나체 */
+
+@font-face {
+    font-family: "SBAggroB_M";
+    src: url("../assets/fonts/SBAggroB_M.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "SBAggroB_B";
+    src: url("../assets/fonts/SBAggroB_B.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "SBAggroB_L";
+    src: url("../assets/fonts/SBAggroB_L.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+html,
+body {
+    font-family: "SBAggroB_L";
+}

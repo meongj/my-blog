@@ -1,0 +1,46 @@
+---
+import PostLayout from '../../layouts/PostLayout.astro';
+// slug로 해당 마크다운 가져오기
+import { getEntryBySlug, getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  // posts 컬렉션의 모든 slug를 가져옴
+  const posts = await getCollection('posts');
+  return posts.map(post => ({
+    params: { slug: post.slug }
+  }));
+}
+
+const {slug} = Astro.params;
+const post = await getEntryBySlug('posts', slug);
+
+if (!post) throw new Error(`Post not found for slug: ${slug}`);
+
+// [post]
+// {
+//   id: string,
+//   slug: string,
+//   body: string,
+//   collection: string,
+//   data: {
+//     title: string,
+//     ...
+//   },
+//   Content: AstroComponent  // 이게 바로 마크다운 컴포넌트임
+// }
+// console.log(post);
+const { title, date, category, image } = post.data;
+// const content = post.rendered.html; 
+const { Content } = await post.render(); // .render()를 호출하여 Content 컴포넌트 얻기
+// console.log(content);
+// console.log('여기', post?.Content);
+
+
+
+---
+
+
+<PostLayout title={title} date={date} category={category} image={image} >
+    <Content/>
+</PostLayout>
+

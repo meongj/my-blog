@@ -1,0 +1,30 @@
+/* public/css/markdown.css */
+
+.markdown-body {
+    font-family: "Pretendard", sans-serif;
+    line-height: 1.8;
+    max-width: 720px;
+    margin: auto;
+    padding: 2rem;
+    color: #333;
+    background-color: #fff;
+}
+
+.markdown-body h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #eee;
+}
+
+.markdown-body pre {
+    background: #f4f4f4;
+    padding: 1rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-family: "Source Code Pro", monospace;
+}
+
+.markdown-body a {
+    color: royalblue;
+    text-decoration: underline;
+}
