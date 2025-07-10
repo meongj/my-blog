@@ -1,0 +1,22 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { getCollection } from 'astro:content';
+import SectionLayout from '../../layouts/SectionLayout.astro';
+
+const { section } = Astro.params;
+
+const allPosts = await getCollection('posts');
+// 해당 section의 글들만 가져오기
+const filteredPosts = allPosts.filter((post) => post.data.section === section);
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  const uniqueSections = [...new Set(posts.map((post) => post.data.section))];
+
+  return uniqueSections.map((section) => ({
+    params: { section },
+  }));
+}
+---
+
+<SectionLayout title={section} posts={filteredPosts} />

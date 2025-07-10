@@ -1,6 +1,6 @@
 @font-face {
-  font-family: "Monaspace";
-  src: url("../assets/fonts/MonaspaceArgon-Regular.otf") format("opentype");
+  font-family: 'Monaspace';
+  src: url('../assets/fonts/MonaspaceArgon-Regular.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
 }
@@ -13,19 +13,21 @@
   align-items: center;
   min-height: calc(100vh - 60px);
   margin: 0;
-  font-family: "Monaspace";
+  font-family: 'Monaspace';
   color: #abb2bf;
   overflow: hidden;
-  background-image: url("../assets/images/bg.gif");
+  background-image: url('../assets/images/bg.gif');
   background-size: cover;
   background-repeat: no-repeat;
   position: relative;
+  padding-top: 60px;
+  /* .menubar 높이만큼 여백 줌 */
 }
 
 /* body 전체에 블러 적용 */
 
 .banner::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   left: 0;

@@ -1,35 +1,53 @@
 ---
 import '../styles/header.css';
+import { sections } from '../../content/config.ts';
+
+// 메뉴 오름차순 정렬
+const sortedSections = [...sections].sort((a, b) => a.localeCompare(b));
 ---
 
 <header class="menubar">
-    <a href="/"><div class="blogName">meongdee.dev</div></a>
+  <a href="/"><div class="blogName">meongdee.dev</div></a>
 
-    <!-- 메뉴 드롭다운 -->
-    <div class="menu-container">
-      <ul class="menu">
-        <li>
-          posts
-          <!-- <ul class="submenu">
-            <li>Computer Science</li>
-            <li>Algorithm</li>
-            <li>Language</li>
-          </ul> -->
-        </li>
+  <!-- 메뉴 드롭다운 -->
+  <div class="menu-container">
+    <ul class="menu">
+      <li>
+        posts
+        {
+          sortedSections.length > 0 && (
+            <ul class="submenu">
+              {sortedSections.map((menu) => (
+                <a href={`/posts/${encodeURIComponent(menu)}`}>
+                  <li>{menu}</li>
+                </a>
+              ))}
+            </ul>
+          )
+        }
+      </li>
 
-        <li>
-          about
-          <!-- <ul class="submenu">
-            <li>Post1</li>
-            <li>Post2</li>
-            <li>Post3</li>
-          </ul> -->
-        </li>
-      </ul>
-    </div>
+      <li>
+        <a href={`/about`}>about</a>
+      </li>
+    </ul>
+  </div>
 
-    <div class="controls">
-      <!-- <a href="">검색</a> -->
-      <!-- <a href="">햄버거</a> -->
-    </div>
-  </header>
+  <div class="controls">
+    <!-- <a href="">검색</a> -->
+    <!-- <a href="">햄버거</a> -->
+  </div>
+
+  <script>
+    // 스크롤시 헤더 투명하게 변경
+    window.addEventListener('scroll', function () {
+      const header = document.querySelector('.menubar');
+
+      if (window.scrollY > 50) {
+        header.classList.add('transparent');
+      } else {
+        header.classList.remove('transparent');
+      }
+    });
+  </script>
+</header>

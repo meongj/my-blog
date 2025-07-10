@@ -1,13 +1,13 @@
 ---
 layout: ../../layouts/PostLayout.astro
-title: "운영체제란?"
-date: "2022-07-01"
-description: "운영체제에 대해 간략히 소개합니다~~~"
-# author: "Astro Learner"
-image: "/images/cardImg.png"
-category: "운영체제"
-slug: "post-1"
-# tags: ["astro", "blogging", "learning in public"]
+title: '운영체제란?'
+date: '2022-07-01'
+description: '운영체제에 대해 간략히 소개합니다~~~'
+image: '/images/cardImg.png'
+section: 'Language'
+category: '운영체제'
+slug: 'post-1'
+tags: ['astro', 'blogging', 'learning in public']
 ---
 
 # My First Blog Post

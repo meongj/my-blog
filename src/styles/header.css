@@ -2,9 +2,33 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 30px;
-  font-family: "SBAggroB_M";
+  font-family: 'SBAggroB_M';
   border-bottom: 1px solid rgb(227, 224, 224);
+  /* 상단에 고정 */
+  position: fixed;
+  top: 0;
+  /* 화면의 가장 위에 */
+  left: 0;
+  right: 0;
+  height: 60px;
+  /* 메뉴바 높이 */
+  background-color: white;
+  z-index: 9999;
+  /* 다른 요소보다 위에 있도록 */
+  padding: 0 30px;
+  /* 그림자 효과로 떠있는 느낌 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* 배경 투명해졌다가 맨위로 가면 흰색 */
+  background-color: white;
+  /* 부드러운 전환 */
+  transition: background-color 0.3s ease;
+}
+
+/* 스크롤시 헤더 투명해짐 */
+
+.menubar.transparent {
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
 }
 
 .menubar a {
@@ -20,21 +44,19 @@
 
 .blogName a {
   color: inherit;
-  /* 기본 색상 */
   text-decoration: none;
-  /* 밑줄 없애기 */
 }
 
-.menu-container {
-  margin-left: auto;
-}
+/* .menu-container {
+  /* margin-left: auto; */
 
 .menu {
   list-style: none;
   display: flex;
   /* 왼쪽 정렬 */
-  justify-content: flex-start;
-  /* align-items: center; */
+  /* justify-content: flex-start;*/
+  justify-content: center;
+  align-items: center;
   gap: 20px;
   padding: 0;
   margin: 0;
@@ -94,7 +116,7 @@
 /* 메뉴- 마우스 hover시 밑줄긋기 */
 
 .menu > li::after {
-  content: "";
+  content: '';
   position: absolute;
   left: 0;
   bottom: 5px;
@@ -122,7 +144,7 @@
 }
 
 .blogName::after {
-  content: "";
+  content: '';
   position: absolute;
   left: 0;
   bottom: 0;

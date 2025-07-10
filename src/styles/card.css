@@ -33,6 +33,10 @@
   justify-content: space-between;
 }
 
+.content h2 {
+  font-family: 'S-CoreDream-4Regular';
+}
+
 .content .detail {
   font-size: 0.7rem;
   color: rgb(122, 120, 120);
@@ -42,6 +46,7 @@
   /* 3줄로 자르기 */
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
+  font-family: 'SUIT-Regular';
 }
 
 .bottom {

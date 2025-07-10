@@ -1,0 +1,10 @@
+.section-header {
+  padding-top: 150px;
+  padding-bottom: 40px;
+  text-align: center;
+}
+
+.title {
+  display: inline;
+  background: linear-gradient(transparent 50%, #e3d4f5 60%);
+}

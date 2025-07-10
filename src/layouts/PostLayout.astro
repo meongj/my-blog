@@ -1,52 +1,127 @@
 ---
 import '../styles/global.css';
-import Header from "../components/Header.astro";
+import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import "../styles/article.css";
+import '../styles/article.css';
+import '../styles/markdown.css';
+import { allPosts } from '../../content/config.ts';
 
+const { title, date, category, image, tags, slug, section } = Astro.props;
 
-// const { title, date, category, image, children } = Astro.props.frontmatter;
-const { title, date, category, image } = Astro.props;
-// console.log('children', content);
+// 같은 메뉴인 posts만 필터링
+const filteredPosts = allPosts.filter((post) => post.data.section === section);
 
+const { prev, next } = findPrevNext(filteredPosts, slug);
 
+function findPrevNext(posts, currentSlug) {
+  // 현재 index 찾기
+  const index = posts.findIndex((post) => post.data.slug === currentSlug);
+  // 이전
+  const prev = index > 0 ? posts[index - 1] : null;
+  // 다음
+  const next = index < posts.length - 1 ? posts[index + 1] : null;
+
+  return { prev, next };
+}
 ---
-<!-- 상세페이지 -->
-<!doctype html>
+
+<!-- 상세페이지 --><!doctype html>
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-    <title>블로그 상세페이지</title>
-    <link rel="stylesheet" href="/css/markdown.css" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" href="/favicon.ico?v=1" type="image/x-icon" />
+    <script
+      src="https://kit.fontawesome.com/60e7029278.js"
+      crossorigin="anonymous"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>Meongdee Dev Blog</title>
   </head>
 
   <body>
-    <Header/>
+    <Header />
 
     <article>
       <div class="article-header">
         <span class="badge">{category}</span>
-        <h1>{title}</h1>
-        <p class="date">{date} </p>
+        <h1 class="title">{title}</h1>
+        <p class="date">{date}</p>
       </div>
-      <hr/>
+      <hr />
       <section>
         {image && <img src={image} alt={title} />}
         <slot />
       </section>
+      <br /><br />
+      <hr />
+
+      <tag>
+        {
+          tags.map((tag) => (
+            <a>
+              <span>
+                <i class="fa-solid fa-tag" />
+                &nbsp;{tag}
+              </span>
+            </a>
+          ))
+        }
+      </tag>
     </article>
 
-    <Footer/>
+    <!-- 이전글 / 다음글 -->
+    <nav>
+      {
+        prev ? (
+          <a href={`/posts/${prev.slug}`} class="prev">
+            <div class="arrow">
+              <i class="fa-solid fa-circle-chevron-left" />
+            </div>
+            <div class="text">
+              <div class="head">이전글</div>
+              <div class="body">{prev.data.title}</div>
+            </div>
+          </a>
+        ) : (
+          <div class="prev placeholder" />
+        )
+      }
+
+      {
+        next ? (
+          <a href={`/posts/${next.slug}`} class="next">
+            <div class="text">
+              <div class="head">다음글</div>
+              <div class="body">{next.data.title}</div>
+            </div>
+            <div class="arrow">
+              <i class="fa-solid fa-circle-chevron-right" />
+            </div>
+          </a>
+        ) : (
+          <div class="next placeholder" />
+        )
+      }
+    </nav>
+
+    <Footer />
   </body>
 </html>
 
 <style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
 </style>

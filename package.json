@@ -11,6 +11,12 @@
   "dependencies": {
     "@astrojs/markdown-remark": "^6.3.2",
     "astro": "^5.11.0",
+    "prismjs": "^1.30.0",
+    "remark-admonitions": "^1.2.1",
     "remark-gfm": "^4.0.1"
+  },
+  "devDependencies": {
+    "prettier": "^3.6.2",
+    "prettier-plugin-astro": "^0.14.1"
   }
 }

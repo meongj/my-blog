@@ -1,27 +1,85 @@
+/* 나눔고딕 */
+
+@import url('http://fonts.googleapis.com/earlyaccess/nanumgothic.css');
+
 /* 한나체 */
 
 @font-face {
-    font-family: "SBAggroB_M";
-    src: url("../assets/fonts/SBAggroB_M.otf") format("opentype");
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'SBAggroB_M';
+  src: url('../assets/fonts/SBAggroB_M.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: "SBAggroB_B";
-    src: url("../assets/fonts/SBAggroB_B.otf") format("opentype");
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'SBAggroB_B';
+  src: url('../assets/fonts/SBAggroB_B.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: "SBAggroB_L";
-    src: url("../assets/fonts/SBAggroB_L.otf") format("opentype");
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'SBAggroB_L';
+  src: url('../assets/fonts/SBAggroB_L.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* 상세페이지 제목 */
+
+@font-face {
+  font-family: 'S-CoreDream-3Light';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'S-CoreDream-4Regular';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'S-CoreDream-5Medium';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-5Medium.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'S-CoreDream-6Bold';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-6Bold.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* 상세 페이지 본문 제목*/
+
+@font-face {
+  font-family: 'Pretendard-Regular';
+  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff')
+    format('woff');
+  font-weight: 100;
+  font-style: normal;
+}
+
+/* 특이한 폰트 */
+
+@font-face {
+  font-family: 'SUIT-Regular';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2')
+    format('woff2');
+  font-weight: normal;
+  font-style: normal;
 }
 
 html,
 body {
-    font-family: "SBAggroB_L";
+  font-family: 'SBAggroB_L';
 }
