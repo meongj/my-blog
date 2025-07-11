@@ -1,0 +1,10 @@
+.comment {
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  text-align: center;
+  font-family: 'SUIT-Regular';
+  padding-top: 50px;
+  padding-bottom: 60px;
+}
