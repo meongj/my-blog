@@ -6,7 +6,7 @@ export const posts = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
-    date: z.string(),
+    date: z.date(),
     section: z.string(),
     category: z.string(),
     image: z.string(),

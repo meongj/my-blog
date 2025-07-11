@@ -1,13 +1,12 @@
 ---
-layout: ../../layouts/PostLayout.astro
-title: '운영체제란?'
-date: '2022-07-01'
-description: '운영체제에 대해 간략히 소개합니다~~~'
-image: '/images/cardImg.png'
-section: 'Language'
+title: '운영 체제(OS)란 무엇일까?'
+date: '2025-06-11 17:41'
+description: ''
+section: 'Computer Science'
 category: '운영체제'
-slug: 'post-1'
-tags: ['astro', 'blogging', 'learning in public']
+slug: '운영-체제(OS)란-무엇일까?'
+tags: ['운영체제', 'OS', 'Computer Science']
+image: '/images/posts/post1/image.png'
 ---
 
 # My First Blog Post
@@ -25,3 +24,7 @@ Welcome to my _new blog_ about learning Astro! Here, I will share my learning jo
 ## What's next
 
 I will finish the Astro tutorial, and then keep adding more posts. Watch this space for more to come.
+
+<img src="/images/posts/post1/os3.png" />
+
+[텍스트](https://example.com)

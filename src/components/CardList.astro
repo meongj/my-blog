@@ -5,6 +5,23 @@ import '../styles/cardList.css';
 
 const allPosts = await getCollection('posts');
 const { posts } = Astro.props;
+
+let sortedAllPosts = [];
+let sortedPosts = [];
+
+// console.log('전체 포스팅 수', allPosts.length);
+// 최신순으로 정렬
+if (allPosts && allPosts.length > 0) {
+  sortedAllPosts = [...allPosts].sort(
+    (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+  );
+}
+
+if (posts && posts.length > 0) {
+  sortedPosts = [...posts].sort(
+    (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+  );
+}
 ---
 
 <div>
@@ -19,7 +36,7 @@ const { posts } = Astro.props;
   <div class="cards">
     {
       posts && posts.length > 0 ? (
-        posts.map((post) => (
+        sortedPosts.map((post) => (
           <Card
             title={post.data.title}
             description={post.data.description}
@@ -27,10 +44,11 @@ const { posts } = Astro.props;
             category={post.data.category}
             image={post.data.image}
             slug={post.data.slug}
+            type="section"
           />
         ))
       ) : allPosts && allPosts.length > 0 ? (
-        allPosts.map((post) => (
+        sortedAllPosts.map((post) => (
           <Card
             title={post.data.title}
             description={post.data.description}

@@ -12,24 +12,13 @@ export async function getStaticPaths() {
 }
 
 const { slug } = Astro.params;
+
 const post = await getEntryBySlug('posts', slug);
 
 if (!post) throw new Error(`Post not found for slug: ${slug}`);
 
-// [post]
-// {
-//   id: string,
-//   slug: string,
-//   body: string,
-//   collection: string,
-//   data: {
-//     title: string,
-//     ...
-//   },
-//   Content: AstroComponent  // 이게 바로 마크다운 컴포넌트임
-// }
-
 const { title, date, category, image, tags, section } = post.data;
+
 const { Content } = await post.render(); // .render()를 호출하여 Content 컴포넌트 얻기
 ---
 

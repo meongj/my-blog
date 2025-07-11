@@ -8,8 +8,12 @@ import { allPosts } from '../../content/config.ts';
 
 const { title, date, category, image, tags, slug, section } = Astro.props;
 
-// 같은 메뉴인 posts만 필터링
-const filteredPosts = allPosts.filter((post) => post.data.section === section);
+// 같은 메뉴인 posts만 필터링, 시간순 정렬
+const filteredPosts = allPosts
+  .filter((post) => post.data.section === section)
+  .sort(
+    (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+  );
 
 const { prev, next } = findPrevNext(filteredPosts, slug);
 
