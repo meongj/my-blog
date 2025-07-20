@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@astrojs/markdown-remark": "^6.3.2",
+    "@astrojs/sitemap": "^3.4.1",
     "astro": "^5.11.0",
     "prismjs": "^1.30.0",
     "remark-admonitions": "^1.2.1",
