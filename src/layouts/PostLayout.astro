@@ -7,7 +7,8 @@ import '../styles/article.css';
 import '../styles/markdown.css';
 import { allPosts } from '../../content/config.ts';
 
-const { title, date, category, image, tags, slug, section } = Astro.props;
+const { title, date, category, image, tags, slug, section, description } =
+  Astro.props;
 
 // 같은 메뉴인 posts만 필터링, 시간순 정렬
 const filteredPosts = allPosts
@@ -28,9 +29,12 @@ function findPrevNext(posts, currentSlug) {
 
   return { prev, next };
 }
+// <!-- 상세페이지 -->
+const siteUrl = 'https://meongdee.dev';
+const canonicalUrl = `${siteUrl}/blog/${slug}/`; // 블로그 포스트 경로 예시
 ---
 
-<!-- 상세페이지 --><!doctype html>
+<!doctype html>
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
@@ -48,18 +52,24 @@ function findPrevNext(posts, currentSlug) {
       href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap"
       rel="stylesheet"
     />
-    <meta property="og:image" content="https://meongdee.dev/images/bg.gif" } />
-    <meta property="og:title" content="Meongdee's Devlog" />
-    <meta
-      property="og:description"
-      content="개발자의 하루 하루 성장하며 배운 것들을 기록합니다."
-    />
+
     <!-- 광고 -->
     <script
       async
       src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3621878593555522"
       crossorigin="anonymous"></script>
     <title>Meongdee Dev Blog</title>
+    <!-- SEO -->
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:type" content="article" />
+
+    <meta name="robots" content="index, follow" />
   </head>
 
   <body>
