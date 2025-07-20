@@ -9,7 +9,7 @@ tags: ['운영체제', 'OS', 'Computer Science']
 image: '/images/posts/post1/image.png'
 ---
 
-# My First Blog Post
+# 시작하기
 
 Welcome to my _new blog_ about learning Astro! Here, I will share my learning journey as I build a new website.
 
