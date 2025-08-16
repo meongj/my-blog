@@ -18,10 +18,23 @@ const sortedSections = [
 
 // 현재 경로 확인
 const currentPath = Astro.url.pathname;
-const currentSection =
-  currentPath === '/posts'
-    ? '/posts'
-    : currentPath.replace('/posts/', '').replace('%20', ' ');
+// URL 정규화 함수
+const normalizeUrl = (url) => {
+  return url.toLowerCase().replace(/\/$/, ''); // 끝 슬래시 제거 + 소문자
+};
+
+const getCurrentSection = (path) => {
+  const normalized = normalizeUrl(path);
+
+  if (normalized === '/posts') {
+    return '/posts';
+  } else if (normalized.startsWith('/posts/')) {
+    return normalized.replace('/posts/', '').replace('%20', ' ');
+  }
+  return '/posts';
+};
+
+const currentSection = getCurrentSection(currentPath);
 ---
 
 <!doctype html>
