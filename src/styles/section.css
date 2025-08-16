@@ -8,3 +8,41 @@
   display: inline;
   background: linear-gradient(transparent 50%, #e3d4f5 60%);
 }
+
+.menu-tab-container {
+  display: flex;
+  justify-content: left;
+  align-items: left;
+  gap: 16px;
+  margin-top: 30px;
+  padding: 10px 25px 10px 25px;
+}
+
+.menu-tab {
+  min-width: 30px;
+  height: 30px;
+  border-radius: 20px;
+  padding: 0px 10px 0px 10px;
+  background-color: #d1d5db;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #374151;
+  font-weight: 500;
+  font-size: x-small;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.menu-tab:hover {
+  background-color: #4b5563;
+  color: white;
+}
+
+.menu-tab.active {
+  background-color: #4b5563;
+  color: white;
+}

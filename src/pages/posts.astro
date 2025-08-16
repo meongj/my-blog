@@ -1,0 +1,10 @@
+---
+import SectionLayout from '../layouts/SectionLayout.astro';
+import { getCollection } from 'astro:content';
+
+const section = 'Posts';
+
+const allPosts = await getCollection('posts');
+---
+
+<SectionLayout title={section} posts={allPosts} />

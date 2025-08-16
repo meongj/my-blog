@@ -6,8 +6,22 @@ import '../styles/cardList.css';
 import '../styles/main.css';
 import CardList from '../components/CardList.astro';
 import '../styles/section.css';
+import { sections } from '../../content/config.ts';
 
 const { title, posts } = Astro.props;
+
+// 메뉴 오름차순 정렬
+const sortedSections = [
+  '/posts',
+  ...sections.sort((a, b) => a.localeCompare(b)),
+];
+
+// 현재 경로 확인
+const currentPath = Astro.url.pathname;
+const currentSection =
+  currentPath === '/posts'
+    ? '/posts'
+    : currentPath.replace('/posts/', '').replace('%20', ' ');
 ---
 
 <!doctype html>
@@ -32,12 +46,32 @@ const { title, posts } = Astro.props;
 
   <body>
     <Header />
+
     <!-- 섹션 제목 -->
     <div class="section-header">
       <h1 class="title">{title}</h1>
     </div>
     <!-- 카드 리스트 -->
     <main class="content">
+      <!-- 전체 포스팅 눌렀을 경우 메뉴탭 -->
+      <div class="menu-tab-container">
+        {
+          sortedSections.map((menu) => {
+            const isAllPosts = menu === '/posts';
+            const href = isAllPosts
+              ? '/posts'
+              : `/posts/${encodeURIComponent(menu)}`;
+            const text = isAllPosts ? '전체' : menu;
+            const isActive = currentSection === menu;
+
+            return (
+              <a className={`menu-tab ${isActive ? 'active' : ''}`} href={href}>
+                {text}
+              </a>
+            );
+          })
+        }
+      </div>
       <CardList posts={posts} />
     </main>
     <Footer />
@@ -52,3 +86,27 @@ const { title, posts } = Astro.props;
     height: 100%;
   }
 </style>
+
+<script>
+  // 메뉴 탭 클릭 이벤트
+  document.addEventListener('DOMContentLoaded', function () {
+    const menuTabs = document.querySelectorAll('.menu-tab');
+
+    menuTabs.forEach((tab) => {
+      tab.addEventListener('click', function () {
+        // 모든 탭에서 active 제거
+        removeActiveTabs();
+        // 클릭된 탭에 active 클래스 추가
+        tab.classList.add('active');
+      });
+    });
+  });
+
+  function removeActiveTabs() {
+    const menuTabs = document.querySelectorAll('.menu-tab');
+
+    menuTabs.forEach((otherTab) => {
+      otherTab.classList.remove('active');
+    });
+  }
+</script>
