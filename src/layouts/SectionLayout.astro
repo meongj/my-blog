@@ -62,7 +62,8 @@ const currentSection =
               ? '/posts'
               : `/posts/${encodeURIComponent(menu)}`;
             const text = isAllPosts ? '전체' : menu;
-            const isActive = currentSection === menu;
+            const isActive =
+              currentSection.toLowerCase() === menu.toLowerCase();
 
             return (
               <a className={`menu-tab ${isActive ? 'active' : ''}`} href={href}>
