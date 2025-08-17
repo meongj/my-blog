@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Card from '../components/Card.astro';
+import Pagination from '../components/Pagination.astro';
 import '../styles/cardList.css';
 
 const allPosts = await getCollection('posts');
@@ -9,7 +10,6 @@ const { posts } = Astro.props;
 let sortedAllPosts = [];
 let sortedPosts = [];
 
-// console.log('전체 포스팅 수', allPosts.length);
 // 최신순으로 정렬
 if (allPosts && allPosts.length > 0) {
   sortedAllPosts = [...allPosts].sort(
@@ -22,33 +22,27 @@ if (posts && posts.length > 0) {
     (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
   );
 }
+
+// 페이지네이션 설정
+const postsToDisplay = posts && posts.length > 0 ? sortedPosts : sortedAllPosts;
+const pageSize = 5;
+const totalPages = Math.ceil(postsToDisplay.length / pageSize);
+const currentPage = 1; // 항상 1페이지부터 시작 (클라이언트에서 처리)
 ---
 
 <div>
   <div class="post-header">
     <div class="post-title">
       <h4>전체글</h4>
-      <span>({posts ? posts.length : allPosts.length})</span>
+      <span>({postsToDisplay.length})</span>
     </div>
     <hr />
   </div>
 
   <div class="cards">
     {
-      posts && posts.length > 0 ? (
-        sortedPosts.map((post) => (
-          <Card
-            title={post.data.title}
-            description={post.data.description}
-            date={post.data.date}
-            category={post.data.category}
-            image={post.data.image}
-            slug={post.data.slug}
-            type="section"
-          />
-        ))
-      ) : allPosts && allPosts.length > 0 ? (
-        sortedAllPosts.map((post) => (
+      postsToDisplay.length > 0 ? (
+        postsToDisplay.map((post) => (
           <Card
             title={post.data.title}
             description={post.data.description}
@@ -63,4 +57,13 @@ if (posts && posts.length > 0) {
       )
     }
   </div>
+
+  {/* 페이지네이션 컴포넌트 */}
+  {totalPages > 1 && (
+    <Pagination 
+      currentPage={currentPage} 
+      totalPages={totalPages} 
+      baseUrl={Astro.url.pathname}
+    />
+  )}
 </div>

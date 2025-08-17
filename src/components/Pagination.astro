@@ -1,0 +1,153 @@
+---
+import '../styles/pagination.css';
+
+const { currentPage, totalPages, baseUrl } = Astro.props;
+---
+
+<div
+  class="pagination-container"
+  data-base-url={baseUrl}
+  data-total-pages={totalPages}
+>
+  <div class="pagination">
+    <!-- 이전 페이지 -->
+    <button
+      class="pagination-link prev-btn"
+      data-page={currentPage - 1}
+      disabled={currentPage <= 1}
+    >
+      이전
+    </button>
+
+    <!-- 페이지 번호들 -->
+    <div class="page-numbers">
+      {
+        Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+          <button
+            class="pagination-link page-btn"
+            data-page={page}
+            data-active={page === currentPage}
+          >
+            {page}
+          </button>
+        ))
+      }
+    </div>
+
+    <!-- 다음 페이지 -->
+    <button
+      class="pagination-link next-btn"
+      data-page={currentPage + 1}
+      disabled={currentPage >= totalPages}
+    >
+      다음
+    </button>
+  </div>
+</div>
+
+<script>
+  function initPagination() {
+    const container = document.querySelector('.pagination-container');
+    if (!container) {
+      console.log('Pagination container not found');
+      return;
+    }
+
+    const totalPages = parseInt(container.dataset.totalPages);
+    let currentPage = 1;
+
+    // URL에서 현재 페이지 가져오기
+    const urlParams = new URLSearchParams(window.location.search);
+    const pageParam = urlParams.get('page');
+    if (pageParam) {
+      currentPage = parseInt(pageParam);
+    }
+
+    // 포스트 표시/숨기기
+    function showPage(page) {
+      // Card 컴포넌트는 a.card로 렌더링됨
+      const allCards = document.querySelectorAll('.cards > .card');
+
+      const pageSize = 5;
+      const startIndex = (page - 1) * pageSize;
+      const endIndex = startIndex + pageSize;
+
+      allCards.forEach((card, index) => {
+        if (index >= startIndex && index < endIndex) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      // 버튼 상태 업데이트
+      updateButtonStates(page);
+
+      // URL 업데이트 (히스토리에 추가하지 않음)
+      const url = new URL(window.location);
+      if (page === 1) {
+        url.searchParams.delete('page');
+      } else {
+        url.searchParams.set('page', page.toString());
+      }
+      window.history.replaceState({}, '', url);
+    }
+
+    // 버튼 상태 업데이트
+    function updateButtonStates(page) {
+      // 모든 페이지 버튼 업데이트
+      document.querySelectorAll('.page-btn').forEach((btn) => {
+        const btnPage = parseInt(btn.dataset.page);
+        btn.dataset.active = btnPage === page;
+      });
+
+      // 이전/다음 버튼 업데이트
+      const prevBtn = document.querySelector('.prev-btn');
+      const nextBtn = document.querySelector('.next-btn');
+
+      if (prevBtn) {
+        prevBtn.disabled = page <= 1;
+        prevBtn.dataset.page = page - 1;
+      }
+
+      if (nextBtn) {
+        nextBtn.disabled = page >= totalPages;
+        nextBtn.dataset.page = page + 1;
+      }
+    }
+
+    /**
+     * ClientRouter 사용하면 이벤트 리스너가 사라질 수 있기 때문에
+     * 기존 요소를 복사해서 교체함 (이벤트 리스너를 초기화함)
+     */
+    // 이전 이벤트 리스너 제거
+    const oldContainer = container.cloneNode(true);
+    container.parentNode.replaceChild(oldContainer, container);
+
+    // 버튼 클릭 이벤트
+    oldContainer.addEventListener('click', (e) => {
+      const button = e.target.closest('.pagination-link');
+      if (!button || button.disabled) return;
+
+      const page = parseInt(button.dataset.page);
+
+      if (page > 0 && page <= totalPages) {
+        currentPage = page;
+        showPage(currentPage);
+      }
+    });
+
+    // 초기 페이지 표시
+    showPage(currentPage);
+  }
+
+  // ClientRouter사용시 -View Transitions 지원
+  document.addEventListener('astro:page-load', () => {
+    initPagination();
+  });
+
+  // 일반 페이지 로드 지원 (View Transitions 비활성화 시)
+  document.addEventListener('DOMContentLoaded', () => {
+    initPagination();
+  });
+</script>

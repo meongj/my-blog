@@ -7,6 +7,7 @@ import '../styles/main.css';
 import CardList from '../components/CardList.astro';
 import '../styles/section.css';
 import { sections } from '../../content/config.ts';
+import { ClientRouter } from 'astro:transitions';
 
 const { title, posts } = Astro.props;
 
@@ -53,6 +54,7 @@ const currentSection = getCurrentSection(currentPath);
       property="og:description"
       content="개발자의 하루 하루 성장하며 배운 것들을 기록합니다."
     />
+    <ClientRouter />
 
     <title>Meongdee Dev Blog</title>
   </head>
