@@ -1,9 +1,9 @@
 ---
 title: '[React] useEffect와 생명 주기'
 date: '2025-10-28 17:10'
-description: ''
+description: 'React의 useEffect Hook의 개념과 사용법을 알아보자. 순수 함수와 Side Effect의 차이, 의존성 배열에 따른 동작 방식, 그리고 컴포넌트 생명주기에 따른 cleanup 함수의 역할까지 정리'
 section: 'React'
-category: 'hooks'
+category: 'React'
 slug: 'useEffect-생명주기'
 tags: ['useEffect', '마운트', '생명주기', 'React']
 image: '/images/posts/post17/useEffect.jpeg'
@@ -219,9 +219,11 @@ React는 useEffect가 다시 실행되기 전에 이전의 effect를 정리해�
 
 화면에서 컴포넌트는 사라지게 되고 서버 연결도 안전하게 종료된다.
 
+<br>
+
 ---
 
-참고 자료
+**참고 자료**
 
 - [https://react.dev/learn/keeping-components-pure](https://react.dev/learn/keeping-components-pure)
 - [https://ko.react.dev/learn/lifecycle-of-reactive-effects](https://ko.react.dev/learn/lifecycle-of-reactive-effects)
