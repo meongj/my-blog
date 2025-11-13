@@ -1,6 +1,6 @@
 ---
 title: '[React] useCallback은 무엇일까?'
-date: '2025-10-28 17:10'
+date: '2025-11-13 16:01'
 description: 'React의 useCallback Hook이 무엇인지, 왜 필요한지 기초부터 알아보자. 함수 메모이제이션의 개념과 기본 사용법을 이해하고 불필요한 리렌더링을 방지하는 useCallback의 동작 원리 설명'
 section: 'React'
 category: 'React'
@@ -9,9 +9,7 @@ tags: ['useCallback', '리렌더링', '메모이제이션', 'React']
 image: '/images/posts/post17/useEffect.jpeg'
 ---
 
-# useCallback
-
-## useCallback이 뭘까?
+## useCallback의 정의
 
 ```tsx
 useCallback은 리렌더링 간 함수 정의를 캐싱해주는 React hook이다
