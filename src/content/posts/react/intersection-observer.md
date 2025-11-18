@@ -74,7 +74,7 @@ function InfiniteScroll() {
 
 entries는 배열로 감시중인 요소의 정보가 들어있다.
 
-<img src="/images/posts/post19/result2.gif" alt="entries 이미지" width="300">
+<img src="/images/posts/post19/result2.png" alt="entries 이미지">
 
 여기서 객체 전체의 요소를 살펴보면 다음과 같다.
 
@@ -173,7 +173,7 @@ export default BowlCardListPage;
 
 **결과 화면**
 
-<img src="/images/posts/post19/result.gif" alt="결과" width="300">
+<img src="/images/posts/post19/result.gif" alt="결과" width="400">
 
 <br>
 <br>
