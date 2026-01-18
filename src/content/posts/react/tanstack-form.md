@@ -444,7 +444,7 @@ export default App;
 
 <br>
 
-<img src="/images/posts/post21/result.gif" alt="결과 화면" width="300" height="200">
+<img src="/images/posts/post21/result.gif" alt="결과 화면" width="400" height="500">
 
 <br>
 
