@@ -2,8 +2,8 @@
 title: '개인 프로젝트 : Github actions 자동 배포 도입기'
 date: '2026-02-04 17:43'
 description: '현재 실제로 운영되고 있던 개인 프로젝트가 있었는데, 배포 절차를 수동으로 진행하고 있었다. 배포 할때마다 SSH로 서버에 접속해 github 소스를 pull 받고 빌드하는 과정이 번거로울 때가 많았다. 이렇게 수동으로 진행했던 배포를 자동화시켜서 실제 서비스에 적용하는 과정을 담았다.'
-section: 'CI/CD'
-category: 'CI/CD'
+section: 'DevOps'
+category: 'DevOps'
 slug: 'Github-Actions'
 tags: ['Github Actions', 'CI/CD', '자동배포']
 image: '/images/posts/post25/image1.jpg'
