@@ -1,0 +1,63 @@
+---
+import '../styles/toc.css';
+
+const { headings } = Astro.props;
+const tocHeadings = headings.filter((h) => h.depth === 2 || h.depth === 3);
+---
+
+<nav class="toc-nav">
+  <ul>
+    {
+      tocHeadings.map((heading) => (
+        <li class={heading.depth === 3 ? 'toc-h3' : ''}>
+          <a href={`#${heading.slug}`} data-slug={heading.slug}>
+            {heading.text}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<script>
+  function initToc() {
+    const tocLinks = document.querySelectorAll('.toc-nav a');
+    const headings = document.querySelectorAll('section h2, section h3');
+
+    if (!tocLinks.length || !headings.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            tocLinks.forEach((link) => link.classList.remove('active'));
+            const activeLink = document.querySelector(
+              `.toc-nav a[data-slug="${entry.target.id}"]`
+            );
+            if (activeLink) activeLink.classList.add('active');
+          }
+        });
+      },
+      { rootMargin: '-80px 0px -70% 0px' }
+    );
+    headings.forEach((heading) => observer.observe(heading));
+
+    tocLinks.forEach((link) => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const slug = link.getAttribute('data-slug');
+        const target = document.getElementById(slug);
+        if (target) {
+          // 상단 헤더 offset
+          const headerOffset = 100;
+          const targetPosition =
+            target.getBoundingClientRect().top + window.scrollY - headerOffset;
+          window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+        }
+      });
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', initToc);
+  document.addEventListener('astro:page-load', initToc);
+</script>

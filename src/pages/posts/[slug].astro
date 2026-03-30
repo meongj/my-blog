@@ -19,7 +19,8 @@ if (!post) throw new Error(`Post not found for slug: ${slug}`);
 
 const { title, date, category, image, tags, section } = post.data;
 
-const { Content } = await post.render(); // .render()를 호출하여 Content 컴포넌트 얻기
+// 마크다운 렌더링 -> 자동 추출
+const { Content, headings } = await post.render();
 ---
 
 <PostLayout
@@ -30,6 +31,7 @@ const { Content } = await post.render(); // .render()를 호출하여 Content �
   tags={tags}
   slug={slug}
   section={section}
+  headings={headings}
 >
   <Content />
 </PostLayout>

@@ -3,12 +3,23 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Comment from '../components/Comment.astro';
+import TableOfContents from '../components/TableOfContents.astro';
 import '../styles/article.css';
 import '../styles/markdown.css';
+import '../styles/toc.css';
 import { allPosts } from '../../content/config.ts';
 
-const { title, date, category, image, tags, slug, section, description } =
-  Astro.props;
+const {
+  title,
+  date,
+  category,
+  image,
+  tags,
+  slug,
+  section,
+  description,
+  headings,
+} = Astro.props;
 
 // 같은 메뉴인 posts만 필터링, 시간순 정렬
 const filteredPosts = allPosts
@@ -75,33 +86,40 @@ const canonicalUrl = `${siteUrl}/blog/${slug}/`; // 블로그 포스트 경로 �
   <body>
     <Header />
 
-    <article>
-      <div class="article-header">
-        <span class="badge">{category}</span>
-        <h1 class="title">{title}</h1>
-        <p class="date">{date}</p>
-      </div>
-      <hr />
-      <section>
-        {image && <img src={image} alt={title} />}
-        <slot />
-      </section>
-      <br /><br />
-      <hr />
+    <div class="post-wrapper">
+      <article>
+        <div class="article-header">
+          <span class="badge">{category}</span>
+          <h1 class="title">{title}</h1>
+          <p class="date">{date}</p>
+        </div>
+        <hr />
+        <section>
+          {image && <img src={image} alt={title} />}
+          <slot />
+        </section>
+        <br /><br />
+        <hr />
 
-      <tag>
-        {
-          tags.map((tag) => (
-            <a>
-              <span>
-                <i class="fa-solid fa-tag" />
-                &nbsp;{tag}
-              </span>
-            </a>
-          ))
-        }
-      </tag>
-    </article>
+        <tag>
+          {
+            tags.map((tag) => (
+              <a>
+                <span>
+                  <i class="fa-solid fa-tag" />
+                  &nbsp;{tag}
+                </span>
+              </a>
+            ))
+          }
+        </tag>
+      </article>
+
+      <!-- TOC -->
+      <aside class="toc-aside">
+        <TableOfContents headings={headings} />
+      </aside>
+    </div>
 
     <!-- 이전글 / 다음글 -->
     <nav>
