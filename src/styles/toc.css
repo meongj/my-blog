@@ -1,9 +1,16 @@
 .post-wrapper {
   display: flex;
   justify-content: center;
-  max-width: 1200px;
+  max-width: 1240px;
   margin: 0 auto;
-  position: relative;
+}
+
+/* 왼쪽 빈 공간 — TOC와 대칭시켜 article 중앙 유지 */
+
+.post-wrapper::before {
+  content: '';
+  width: 220px;
+  flex-shrink: 0;
 }
 
 /* TOC 사이드바 */
@@ -12,13 +19,14 @@
   width: 220px;
   flex-shrink: 0;
   padding-top: 340px;
+  margin-right: auto;
+  padding-left: 25px;
 }
 
 .toc-nav {
-  padding-left: 16px;
   position: sticky;
   top: 120px;
-  /* 상단에서 120px 떨어져서 고정 */
+  padding-left: 16px;
 }
 
 .toc-title {
@@ -45,10 +53,12 @@
 
 .toc-nav a {
   text-decoration: none;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   color: #999;
   line-height: 1.5;
-  transition: color 0.2s ease;
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease;
   display: block;
 }
 
@@ -59,6 +69,7 @@
 .toc-nav a.active {
   color: #232a42;
   font-weight: 700;
+  transform: translateX(-8px);
 }
 
 /* 1100px 이하에서 TOC 숨김 */
